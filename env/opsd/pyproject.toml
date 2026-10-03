@@ -1,0 +1,39 @@
+[project]
+name = "opsd-env"
+version = "0.1.0"
+description = "Pinned environment for the OPSD / GRPO / SFT experiments (TRL + accelerate + vLLM)."
+requires-python = "==3.12.*"
+dependencies = [
+    "accelerate==1.14.0",
+    "datasets==5.0.1",
+    "deepspeed==0.19.5",
+    "flash-attn==2.8.3",
+    "math-verify==0.9.0",
+    "pandas==3.0.5",
+    "peft==0.20.0",
+    "pyarrow==25.0.1",
+    "safetensors==0.8.0",
+    "sentencepiece==0.2.2",
+    "tiktoken==0.13.0",
+    "torch==2.13.0",
+    "transformers==5.15.0",
+    "trl==1.9.2",
+    "vllm==0.27.1",
+    "wandb==0.28.1",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.uv]
+package = false
+environments = ["sys_platform == 'linux'"]
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu130" }
+flash-attn = { url = "https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.9.47/flash_attn-2.8.3+cu130torch2.13-cp312-cp312-linux_x86_64.whl" }
